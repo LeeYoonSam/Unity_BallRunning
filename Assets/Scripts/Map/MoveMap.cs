@@ -20,7 +20,7 @@ public class MoveMap : MonoBehaviour
 
 	private Vector3 tileCenterVec; 	// 기준점
 	private float tileGap = 81.9f;	// 블록 길이 차이
-	private float tileEndPoint = -60f;
+	private float tileEndPoint = -70f;
 
 	private Vector3 tempVec;
 
