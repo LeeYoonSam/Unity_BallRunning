@@ -38,6 +38,7 @@ public class MoveMap : MonoBehaviour
 		public GameObject obj;
 		public bool active;
 		public int parentTileNum;
+		public ObstacleInfo info;	// 장애물 정보 스크립트
 	}
 
 	private ObstacleStruct[] obss;
@@ -82,6 +83,7 @@ public class MoveMap : MonoBehaviour
 			obss[i].obj = Instantiate(obstacle, Vector3.zero, Quaternion.identity) as GameObject;
 			obss[i].active = false;
 			obss[i].parentTileNum = -1;
+			obss[i].info = obss[i].obj.GetComponent<ObstacleInfo>();	// 스크립트 컴포넌트 가져옴
 			obss[i].obj.SetActive(false);	// 초기상태는 비활성화
 		}
 	}
@@ -133,6 +135,7 @@ public class MoveMap : MonoBehaviour
 				obss[i].obj.SetActive(true); // 장애물 활성화
 				obss[i].active = true;
 				obss[i].obj.transform.position = tempVec;
+				obss[i].info.SetObstacle(Random.Range(0, 9));
 				obss[i].obj.transform.SetParent(tiles[tileN].tf);	// 부모 변경
 				obss[i].parentTileNum = tileN;
 				break;	// 하나라도 생성되면 종료
