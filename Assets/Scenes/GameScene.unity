@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 1410189201639950, guid: e883c8b4ca3bd41cd964abf8d3ad1d75, type: 2}
+  obstacle: {fileID: 1523243843532134, guid: cc0c9eb4b5b0b4ad78fab6334197b4f9, type: 2}
 --- !u!4 &420318973
 Transform:
   m_ObjectHideFlags: 0
@@ -243,26 +244,31 @@ GameObject:
   m_Component:
   - component: {fileID: 2035687942}
   - component: {fileID: 2035687941}
+  - component: {fileID: 2035687943}
+  - component: {fileID: 2035687944}
   - component: {fileID: 2035687940}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2035687940
-MonoBehaviour:
+--- !u!58 &2035687940
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2035687939}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbe34719e1f2e46dcb6e1e9dbe9747ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.4319997}
+  serializedVersion: 2
+  m_Radius: 2.45
 --- !u!212 &2035687941
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -315,8 +321,39 @@ Transform:
   m_GameObject: {fileID: 2035687939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.1, y: 0.033, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2035687943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2035687939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22d3efc2bf3d407dab39d264b9ea51b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &2035687944
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2035687939}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

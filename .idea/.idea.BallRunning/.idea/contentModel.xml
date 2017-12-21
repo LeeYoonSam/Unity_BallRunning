@@ -16,7 +16,11 @@
           <e p="Map" t="Include">
             <e p="MoveMap.cs" t="Include" />
           </e>
+          <e p="Obstacle" t="Include">
+            <e p="ObstacleInfo.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
+            <e p="PlayerAction.cs" t="Include" />
             <e p="PlayerMove.cs" t="Include" />
           </e>
         </e>
