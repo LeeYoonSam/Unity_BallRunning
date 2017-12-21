@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7192afb6-d209-42fa-a6c2-d0e5f395d211" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.BallRunning/.idea/contentModel.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.BallRunning/.idea/indexLayout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.BallRunning/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.BallRunning/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.BallRunning/riderModule.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.BallRunning/.idea/contentModel.xml" afterPath="$PROJECT_DIR$/.idea/.idea.BallRunning/.idea/contentModel.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlayerMove.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayerMove.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <marker date="1513822570000" expanded="false" signature="6:78" ph="..." />
                 <marker date="1513822570000" expanded="true" signature="119:416" ph="{...}" />
@@ -33,28 +29,48 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Assembly-CSharp.csproj" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assembly-CSharp.csproj">
+      <file leaf-file-name="MoveMap.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Map/MoveMap.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="558">
+              <caret line="43" column="52" lean-forward="false" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
+              <folding>
+                <marker date="1513832611000" expanded="true" signature="6:78" ph="..." />
+                <marker date="1513832611000" expanded="true" signature="116:1604" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="220:318" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="580:647" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="696:1057" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="800:1034" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="1086:1602" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="1156:1599" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="1226:1318" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="1326:1591" ph="{...}" />
+                <marker date="1513832611000" expanded="true" signature="1470:1511" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tileCenterVec</find>
+      <find>tileNum</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Map/MoveMap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Map/MoveMap.cs" />
       </list>
     </option>
   </component>
@@ -90,29 +106,37 @@
           <expand>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BallRunning (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BallRunning (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BallRunning (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BallRunning (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BallRunning (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BallRunning (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BallRunning (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BallRunning (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="BallRunning (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="BallRunning (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Map" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="BallRunning (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assembly-CSharp" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
@@ -154,12 +178,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1513822345239</updated>
-      <workItem from="1513822348875" duration="279000" />
+      <workItem from="1513822348875" duration="3701000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="279000" />
+    <option name="totallyTimeSpent" value="3701000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -218,13 +242,33 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <marker date="1513822570000" expanded="false" signature="6:78" ph="..." />
             <marker date="1513822570000" expanded="true" signature="119:416" ph="{...}" />
             <marker date="1513822570000" expanded="true" signature="230:260" ph="{...}" />
             <marker date="1513822570000" expanded="true" signature="283:322" ph="{...}" />
             <marker date="1513822570000" expanded="true" signature="351:414" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Map/MoveMap.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="43" column="52" lean-forward="false" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
+          <folding>
+            <marker date="1513832611000" expanded="true" signature="6:78" ph="..." />
+            <marker date="1513832611000" expanded="true" signature="116:1604" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="220:318" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="580:647" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="696:1057" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="800:1034" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="1086:1602" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="1156:1599" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="1226:1318" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="1326:1591" ph="{...}" />
+            <marker date="1513832611000" expanded="true" signature="1470:1511" ph="{...}" />
           </folding>
         </state>
       </provider>
