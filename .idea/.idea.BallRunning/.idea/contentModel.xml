@@ -23,6 +23,9 @@
             <e p="PlayerAction.cs" t="Include" />
             <e p="PlayerMove.cs" t="Include" />
           </e>
+          <e p="System" t="Include">
+            <e p="ScoreManager.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="BallRunning.sln" t="IncludeFlat" />
