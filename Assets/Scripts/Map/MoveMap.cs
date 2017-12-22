@@ -60,6 +60,8 @@ public class MoveMap : MonoBehaviour
 
 	private PlusScoreStruct[] plusScoreSets;
 	// === 보너스 오브젝트 추가 ===
+
+	private int addTimeCounter = 0;
 	
 	private void Awake()
 	{
@@ -153,10 +155,16 @@ public class MoveMap : MonoBehaviour
 				tiles[i].tf.position = tiles[i].pos; // 실제 위치 변경
 
 				tempLevel = Random.Range(1, 9);
-				
+
+				addTimeCounter++;
+					
 				AddedObs(i, tempLevel);
-				
 				AddPSs(i, tempLevel);
+
+				if (addTimeCounter > 5)
+				{
+					AddedObs(i, -tempLevel);	
+				}
 				
 				lastTileNum = i;	// 다음 변경을 위해 마지막 블록의 번호 변경
 			}
@@ -168,20 +176,50 @@ public class MoveMap : MonoBehaviour
 	{
 		// 해당하는 타일에 장애물 추가해줌
 		tempVec.x = tiles[tileN].pos.x;	// 블록 중앙 테스트
-		tempVec.y = 0;
-		tempVec.z = 0;
-		
-		for(int i = 0; i < obsNum; i ++)
+
+		// 아래서 나오는 장애물
+		if (level > 0)
 		{
-			if (!obss[i].active)	// 장애물 활성화
+			tempVec.y = 0;
+		}
+		// 위에서 나오는 장애물(난이도 올라가면 등장)
+		else
+		{
+			tempVec.y = 20.0f; // 화면 최상단에 닿도록 지정
+
+			if (addTimeCounter < 25)
 			{
-				obss[i].obj.SetActive(true); // 장애물 활성화
-				obss[i].active = true;
-				obss[i].obj.transform.position = tempVec;
-				obss[i].info.SetObstacle(level);
-				obss[i].obj.transform.SetParent(tiles[tileN].tf);	// 부모 변경
-				obss[i].parentTileNum = tileN;
-				break;	// 하나라도 생성되면 종료
+				level = -14 + 9 - level; // level은 이미 음수값이니 -14lv에서 여유3 레벨 수치
+				level -= (addTimeCounter - 5) / 5; // 5부터 변경
+
+				if (level > 0)
+				{
+					// 예외처리. 양수로 넘어가는경우 장애물 상단 생성 예정 취소
+					level = 100;
+				}
+			}
+			else
+			{
+				level = -14 + 5 - level; 
+			}
+		}
+		
+		tempVec.z = 0;
+
+		if (level != 100) // 예외처리
+		{
+			for(int i = 0; i < obsNum; i ++)
+			{
+				if (!obss[i].active)	// 장애물 활성화
+				{
+					obss[i].obj.SetActive(true); // 장애물 활성화
+					obss[i].active = true;
+					obss[i].obj.transform.position = tempVec;
+					obss[i].info.SetObstacle(level);
+					obss[i].obj.transform.SetParent(tiles[tileN].tf);	// 부모 변경
+					obss[i].parentTileNum = tileN;
+					break;	// 하나라도 생성되면 종료
+				}
 			}
 		}
 	}

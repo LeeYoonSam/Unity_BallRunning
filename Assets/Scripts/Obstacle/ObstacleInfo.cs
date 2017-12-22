@@ -16,7 +16,15 @@ public class ObstacleInfo : MonoBehaviour
 
 	public void SetObstacle(int lv)
 	{
-		height = 0.5f + 0.5f * lv; // 기본 0.5 + 레벨당 0.5씩 증가
+		if (lv > 0)
+		{
+			height = 0.5f + 0.5f * lv; // 기본 0.5 + 레벨당 0.5씩 증가	
+		}
+		else
+		{
+			height = -0.5f + 0.5f * lv; // 아래로 향하는 방향
+		}
+		
 		Vector3 tempVec = new Vector3(1f, height, 1f);
 		obsTf.localScale = tempVec;
 	}
