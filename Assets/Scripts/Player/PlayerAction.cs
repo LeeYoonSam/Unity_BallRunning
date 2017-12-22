@@ -10,9 +10,13 @@ public class PlayerAction : MonoBehaviour
 	private Transform playerTf;
 	private Vector3 tempVec;
 
+	private Animator playerAni;
+
 	private void Awake()
 	{
 		playerTf = transform;
+
+		playerAni = gameObject.GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -54,8 +58,11 @@ public class PlayerAction : MonoBehaviour
 		{
 			checkTime = 0.35f;
 		}
-
 		Debug.Log("checkTime: " + checkTime);
+		
+		playerAni.SetTrigger("jump1");	// 트리거 사용 -> 애니메이션 시작
+		yield return new WaitForSeconds(0.33f);
+		
 		tempJump = jumpPower * checkTime;
 		tempVec.y += tempJump;
 		playerTf.position = tempVec;
