@@ -24,24 +24,32 @@ public class PlayerAction : MonoBehaviour
 
 	private void Update()
 	{
-		if (!jumpOn)
+		if (!freezeState)
 		{
-
-			if (!freezeState)
+			// 마우스 클릭하면 점프
+			if (Input.GetMouseButton(0))	// 버튼 누름
 			{
-				// 마우스 클릭하면 점프
-				if (Input.GetMouseButton(0))	// 버튼 누름
+				// UI가 위가 아닐때
+				if (EventSystem.current.IsPointerOverGameObject() == false)
 				{
-					// UI가 위가 아닐때
-					if (EventSystem.current.IsPointerOverGameObject() == false)
+					if (checkTime > 0)
 					{
-						StartCoroutine("CheckButtonDownSec");	
+						if (jumpOn)
+						{
+							StopCoroutine("CheckButtonDownSec");
+						}
 					}
-				} 
-				else if (Input.GetMouseButtonUp(0))	// 버튼에서 뗌
+						
+					StartCoroutine("CheckButtonDownSec");	
+				}
+			}
+			
+			if (!jumpOn)
+			{
+				if (Input.GetMouseButtonUp(0))	// 버튼에서 뗌
 				{
 				
-					StopCoroutine("CheckButtonDownSec");
+//					StopCoroutine("CheckButtonDownSec");
 				
 					// UI가 위가 아닐때
 					if (EventSystem.current.IsPointerOverGameObject() == false)
@@ -63,67 +71,96 @@ public class PlayerAction : MonoBehaviour
 				}	
 			}
 		}
+		
 	}
 
 	private float checkTime;
 	private IEnumerator CheckButtonDownSec()
 	{
 		// 버튼 누르고있는 시간 측정을 위한 코루틴
-		checkTime = 0;
+		checkTime = 0.0f;
+		yield return new WaitForSeconds(0.08f);
 
-		while (!jumpOn)
+		while (checkTime < 0.4f)
 		{
-			yield return new WaitForSeconds(0.04f);	// 0.04초에 한번씩 시간측정
-			checkTime += 0.04f;			
+			yield return new WaitForSeconds(0.03f);	// 0.04초에 한번씩 시간측정
+			checkTime += 0.03f;			
 		}
 	}
 
+	private float tempJumpTime;
 	private IEnumerator JumpAction()
 	{
 		// 누르는 시간에 따라 혹은 드래그에 따라 점프 파워 달리함
 		jumpOn = true;
 		tempVec = playerTf.position;
+		
+		tempJumpTime = checkTime;
+		checkTime = 0;
+		StopCoroutine("CheckButtonDownSec");
 
-		if (checkTime > 0.35f) // 차지 가능한 최대 시간
+		// 차지 가능한 최대시간
+		if (tempJumpTime > 0.38f)
 		{
-			checkTime = 0.35f;
+			tempJumpTime = 0.38f;
 		}
 
-		if (checkTime > 0.15f)
+		if (tempJumpTime > 0.15f)
 		{
-			if (checkTime < 0.25f)
+			if (tempJumpTime < 0.25f)
 			{
 				// 낮은 점프
-				playerAni.SetTrigger("jump1");	// 트리거 사용 -> 애니메이션 시작
+				playerAni.SetTrigger("jump1"); // 트리거 사용 -> 애니메이션 시작
 			}
 			else
 			{
 				// 높은 점프
-				playerAni.SetTrigger("jump2");	// 트리거 사용 -> 애니메이션 시작		
+				playerAni.SetTrigger("jump2");	// 트리거 사용 -> 애니메이션 시작
 			}
 			
 			yield return new WaitForSeconds(0.15f);
 		}
 		
 		
-		tempJump = jumpPower * checkTime;
+		tempJump = jumpPower * tempJumpTime;
 		tempVec.y += tempJump;
 		playerTf.position = tempVec;
+
+		float tempFloat = 0.09f;
 		
+		// 상승
+		while (tempJump > 0)
+		{
+			yield return new WaitForSeconds(0.03f);
+			if (tempFloat > 0.02f) ;
+			{
+				tempFloat -= 0.002f;
+			}
+			tempJump -= tempFloat;
+			tempVec.y += tempJump * 1.32f;
+			playerTf.position = tempVec;
+		}
+		
+		// 하락
 		while (tempVec.y > 0)
 		{
 			yield return new WaitForSeconds(0.03f);
-			tempJump -= 0.05f;
+
+			if (tempFloat < 0.08f)
+			{
+				tempFloat += 0.002f;
+			}
+			tempJump -= tempFloat;
 			tempVec.y += tempJump;
 			playerTf.position = tempVec;
+			
 		}
 
-		
 		tempVec.y = 0;
 		playerTf.position = tempVec;
 
 		
-		if (checkTime < 0.25f)
+		if (tempJumpTime < 0.25f)
 		{
 			playerAni.SetTrigger("balldrop1"); // 트리거 사용 -> 애니메이션 시작
 		}

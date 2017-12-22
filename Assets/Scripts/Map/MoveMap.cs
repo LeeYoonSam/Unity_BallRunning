@@ -45,11 +45,28 @@ public class MoveMap : MonoBehaviour
 	// === 장애물 추가 === 
 	
 	
+	
+	// === 보너스 오브젝트 추가 ===
+	public GameObject plusScore;
+
+	private int plusScoreNum = 5;
+
+	struct PlusScoreStruct
+	{
+		public GameObject obj;
+		public bool active;
+		public int parentTileNum;
+	}
+
+	private PlusScoreStruct[] plusScoreSets;
+	// === 보너스 오브젝트 추가 ===
+	
 	private void Awake()
 	{
 		tileCenterVec = new Vector3(0, -5.1f, 0);
 		CreateTiles();
-		CreateObss();
+		CreateObss();	// 장애물 추가
+		CreatePSs();	// plusScoreObj등 생성
 	}
 	
 	// 반복해서 사용할 타일 생성
@@ -58,7 +75,7 @@ public class MoveMap : MonoBehaviour
 		tempVec = tileCenterVec;
 		
 		tiles = new TileStruct[tileNum];
-		for (int i = 0; i < tileNum; i++)
+		for (var i = 0; i < tileNum; i++)
 		{
 			tiles[i].obj = Instantiate(tile, tempVec, Quaternion.identity) as GameObject; // 오브젝트 생성
 			tiles[i].tf = tiles[i].obj.transform;
@@ -78,7 +95,7 @@ public class MoveMap : MonoBehaviour
 		
 		obss = new ObstacleStruct[obsNum];
 
-		for (int i = 0; i < obsNum; i++)
+		for (var i = 0; i < obsNum; i++)
 		{
 			obss[i].obj = Instantiate(obstacle, Vector3.zero, Quaternion.identity) as GameObject;
 			obss[i].active = false;
@@ -88,11 +105,25 @@ public class MoveMap : MonoBehaviour
 		}
 	}
 
+	private void CreatePSs()
+	{
+		plusScoreSets = new PlusScoreStruct[plusScoreNum];
+		for (var i = 0; i < plusScoreNum; i++)
+		{
+			plusScoreSets[i].obj = Instantiate(plusScore, Vector3.zero, Quaternion.identity) as GameObject;
+			plusScoreSets[i].active = false;
+			plusScoreSets[i].parentTileNum = -1;
+			plusScoreSets[i].obj.SetActive(false);
+		}
+	}
+
 	public void FreezeMap()
 	{
 		speed = 0;
 	}
 
+	private int tempLevel = 1;
+	
 	private void FixedUpdate()
 	{
 		// 블록이 계속하여 일정한 속도로 이동하도록 생성
@@ -109,6 +140,8 @@ public class MoveMap : MonoBehaviour
 				// endPoint 초과 -> 가장 마지막 블록으로 위치시킴
 
 				DeleteObs(i);	// 넘어간 블록에 있던 장애물들 제거처리
+				DeletePSs(i);	// 넘어간 블록에 있던 장애물들 제거처리
+				
 				tiles[i].pos = tiles[lastTileNum].pos;
 				tiles[i].pos.x += tileGap;
 
@@ -118,7 +151,12 @@ public class MoveMap : MonoBehaviour
 				}
 
 				tiles[i].tf.position = tiles[i].pos; // 실제 위치 변경
-				AddedObs(i, 1);
+
+				tempLevel = Random.Range(1, 9);
+				
+				AddedObs(i, tempLevel);
+				
+				AddPSs(i, tempLevel);
 				
 				lastTileNum = i;	// 다음 변경을 위해 마지막 블록의 번호 변경
 			}
@@ -126,7 +164,7 @@ public class MoveMap : MonoBehaviour
 		}
 	}
 
-	private void AddedObs(int tileN, int obsN) // 타일번호, 장애물 수
+	private void AddedObs(int tileN, int level) // 타일번호, 장애물 수
 	{
 		// 해당하는 타일에 장애물 추가해줌
 		tempVec.x = tiles[tileN].pos.x;	// 블록 중앙 테스트
@@ -140,7 +178,7 @@ public class MoveMap : MonoBehaviour
 				obss[i].obj.SetActive(true); // 장애물 활성화
 				obss[i].active = true;
 				obss[i].obj.transform.position = tempVec;
-				obss[i].info.SetObstacle(Random.Range(0, 9));
+				obss[i].info.SetObstacle(level);
 				obss[i].obj.transform.SetParent(tiles[tileN].tf);	// 부모 변경
 				obss[i].parentTileNum = tileN;
 				break;	// 하나라도 생성되면 종료
@@ -160,6 +198,50 @@ public class MoveMap : MonoBehaviour
 					obss[i].parentTileNum = -1;	// 값 없음
 					obss[i].obj.SetActive(false); // 비활성화
 					obss[i].active = false;
+				}
+			}
+		}
+	}
+
+	private void AddPSs(int tileN, int level)
+	{
+		// 해당하는 타일에 보너스 점수 추가
+		tempVec.x = tiles[tileN].pos.x;
+		tempVec.y = 2.75f + 1.25f * level;
+		tempVec.z = 0;
+
+		for (var i = 0; i < plusScoreNum; i++)
+		{
+			if (!plusScoreSets[i].active)
+			{
+				plusScoreSets[i].obj.SetActive(true);
+				plusScoreSets[i].active = true;
+				plusScoreSets[i].obj.transform.position = tempVec;
+				plusScoreSets[i].obj.transform.SetParent(tiles[tileN].tf);	// 부모 변경
+				plusScoreSets[i].parentTileNum = tileN;
+				break;
+			}
+		}
+	}
+
+	private void DeletePSs(int tileN)
+	{
+		for (var i = 0; i < plusScoreNum; i++)
+		{
+			if (plusScoreSets[i].active)
+			{
+				if (plusScoreSets[i].parentTileNum == tileN)
+				{
+					plusScoreSets[i].obj.transform.parent = null;
+					plusScoreSets[i].parentTileNum = -1;
+
+					// 보너스의 경우 대부분 먹는다고 가정해둬야 함.
+					if (plusScoreSets[i].obj.activeSelf)
+					{
+						plusScoreSets[i].obj.SetActive(false);
+					}
+
+					plusScoreSets[i].active = false;
 				}
 			}
 		}

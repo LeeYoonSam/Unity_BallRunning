@@ -16,6 +16,9 @@
           <e p="Map" t="Include">
             <e p="MoveMap.cs" t="Include" />
           </e>
+          <e p="Objects" t="Include">
+            <e p="PlusScoreInfo.cs" t="Include" />
+          </e>
           <e p="Obstacle" t="Include">
             <e p="ObstacleInfo.cs" t="Include" />
           </e>

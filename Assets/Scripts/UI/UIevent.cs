@@ -68,7 +68,7 @@ public class UIevent : MonoBehaviour
 		int tempScore = 0;
 		float delaySec = 0.15f;
 
-		bestScoreTx.text = "(BEST : " + resultScore.ToString("N0") + ")";
+		bestScoreTx.text = "(BEST : " + PlayerPrefs.GetInt("BestScore").ToString("N0") + ")";
 
 		while (tempScore < resultScore)
 		{
