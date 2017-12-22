@@ -26,6 +26,9 @@
           <e p="System" t="Include">
             <e p="ScoreManager.cs" t="Include" />
           </e>
+          <e p="UI" t="Include">
+            <e p="UIevent.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="BallRunning.sln" t="IncludeFlat" />

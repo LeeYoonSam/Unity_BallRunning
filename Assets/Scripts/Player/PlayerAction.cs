@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -26,11 +27,36 @@ public class PlayerAction : MonoBehaviour
 			// 마우스 클릭하면 점프
 			if (Input.GetMouseButton(0))	// 버튼 누름
 			{
-				StartCoroutine("CheckButtonDownSec");
+				// UI가 위가 아닐때
+				if (EventSystem.current.IsPointerOverGameObject() == false)
+				{
+					StartCoroutine("CheckButtonDownSec");	
+				}
 			} 
 			else if (Input.GetMouseButtonUp(0))	// 버튼에서 뗌
 			{
-				StartCoroutine("JumpAction");	
+				
+				StopCoroutine("CheckButtonDownSec");
+				
+				// UI가 위가 아닐때
+				if (EventSystem.current.IsPointerOverGameObject() == false)
+				{
+					// 점프 수치가 있어야 실행
+					if (checkTime > 0)
+					{
+						StartCoroutine("JumpAction");
+					}
+				}
+				else
+				{
+					if (checkTime > 0)
+					{
+						StopCoroutine("CheckButtonDownSec");
+						checkTime = 0;
+					}
+				}
+				
+					
 			}
 		}
 	}
@@ -44,7 +70,7 @@ public class PlayerAction : MonoBehaviour
 		while (!jumpOn)
 		{
 			yield return new WaitForSeconds(0.04f);	// 0.04초에 한번씩 시간측정
-			checkTime += 0.04f;
+			checkTime += 0.04f;			
 		}
 	}
 
@@ -58,7 +84,6 @@ public class PlayerAction : MonoBehaviour
 		{
 			checkTime = 0.35f;
 		}
-		Debug.Log("checkTime: " + checkTime);
 
 		if (checkTime > 0.15f)
 		{
@@ -80,7 +105,7 @@ public class PlayerAction : MonoBehaviour
 		tempJump = jumpPower * checkTime;
 		tempVec.y += tempJump;
 		playerTf.position = tempVec;
-
+		
 		while (tempVec.y > 0)
 		{
 			yield return new WaitForSeconds(0.03f);
@@ -89,9 +114,11 @@ public class PlayerAction : MonoBehaviour
 			playerTf.position = tempVec;
 		}
 
+		
 		tempVec.y = 0;
 		playerTf.position = tempVec;
 
+		
 		if (checkTime < 0.25f)
 		{
 			playerAni.SetTrigger("balldrop1"); // 트리거 사용 -> 애니메이션 시작
