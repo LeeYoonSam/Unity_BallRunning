@@ -59,9 +59,23 @@ public class PlayerAction : MonoBehaviour
 			checkTime = 0.35f;
 		}
 		Debug.Log("checkTime: " + checkTime);
+
+		if (checkTime > 0.15f)
+		{
+			if (checkTime < 0.25f)
+			{
+				// 낮은 점프
+				playerAni.SetTrigger("jump1");	// 트리거 사용 -> 애니메이션 시작
+			}
+			else
+			{
+				// 높은 점프
+				playerAni.SetTrigger("jump2");	// 트리거 사용 -> 애니메이션 시작		
+			}
+			
+			yield return new WaitForSeconds(0.15f);
+		}
 		
-		playerAni.SetTrigger("jump1");	// 트리거 사용 -> 애니메이션 시작
-		yield return new WaitForSeconds(0.33f);
 		
 		tempJump = jumpPower * checkTime;
 		tempVec.y += tempJump;
@@ -77,6 +91,16 @@ public class PlayerAction : MonoBehaviour
 
 		tempVec.y = 0;
 		playerTf.position = tempVec;
+
+		if (checkTime < 0.25f)
+		{
+			playerAni.SetTrigger("balldrop1"); // 트리거 사용 -> 애니메이션 시작
+		}
+		else
+		{
+			playerAni.SetTrigger("balldrop2");	// 트리거 사용 -> 애니메이션 시작
+		}
+		
 		jumpOn = false;
 	}
 }
