@@ -88,6 +88,11 @@ public class MoveMap : MonoBehaviour
 		}
 	}
 
+	public void FreezeMap()
+	{
+		speed = 0;
+	}
+
 	private void FixedUpdate()
 	{
 		// 블록이 계속하여 일정한 속도로 이동하도록 생성

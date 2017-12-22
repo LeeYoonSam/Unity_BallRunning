@@ -23,6 +23,13 @@ public class ObstacleInfo : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("충돌: " + other.name);
+		if (other.CompareTag("Player"))
+		{
+			Debug.Log("플레이어와 충돌");
+			GameObject.FindWithTag("Player").GetComponent<PlayerAction>().FreezeBall();
+			GameObject.FindWithTag("GameManager").GetComponent<MoveMap>().FreezeMap();
+			GameObject.FindWithTag("GameManager").GetComponent<ScoreManager>().EndCountScore();
+			GameObject.FindWithTag("GameManager").GetComponent<UIevent>().SetGameOverUI();
+		}
 	}
 }

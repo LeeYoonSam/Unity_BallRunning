@@ -67,4 +67,14 @@ public class ScoreManager : MonoBehaviour
 			PlusScore(100);
 		}
 	}
+
+	public void EndCountScore()
+	{
+		StopAllCoroutines();
+		if (plusIng)
+		{
+			plusIng = false;
+			scoreTx.text = "SCORE : " + scorePoint.ToString("N0");
+		}
+	}
 }

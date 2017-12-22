@@ -13,6 +13,8 @@ public class PlayerAction : MonoBehaviour
 
 	private Animator playerAni;
 
+	private bool freezeState = false;
+
 	private void Awake()
 	{
 		playerTf = transform;
@@ -24,39 +26,41 @@ public class PlayerAction : MonoBehaviour
 	{
 		if (!jumpOn)
 		{
-			// 마우스 클릭하면 점프
-			if (Input.GetMouseButton(0))	// 버튼 누름
+
+			if (!freezeState)
 			{
-				// UI가 위가 아닐때
-				if (EventSystem.current.IsPointerOverGameObject() == false)
+				// 마우스 클릭하면 점프
+				if (Input.GetMouseButton(0))	// 버튼 누름
 				{
-					StartCoroutine("CheckButtonDownSec");	
-				}
-			} 
-			else if (Input.GetMouseButtonUp(0))	// 버튼에서 뗌
-			{
-				
-				StopCoroutine("CheckButtonDownSec");
-				
-				// UI가 위가 아닐때
-				if (EventSystem.current.IsPointerOverGameObject() == false)
-				{
-					// 점프 수치가 있어야 실행
-					if (checkTime > 0)
+					// UI가 위가 아닐때
+					if (EventSystem.current.IsPointerOverGameObject() == false)
 					{
-						StartCoroutine("JumpAction");
+						StartCoroutine("CheckButtonDownSec");	
 					}
-				}
-				else
+				} 
+				else if (Input.GetMouseButtonUp(0))	// 버튼에서 뗌
 				{
-					if (checkTime > 0)
-					{
-						StopCoroutine("CheckButtonDownSec");
-						checkTime = 0;
-					}
-				}
 				
-					
+					StopCoroutine("CheckButtonDownSec");
+				
+					// UI가 위가 아닐때
+					if (EventSystem.current.IsPointerOverGameObject() == false)
+					{
+						// 점프 수치가 있어야 실행
+						if (checkTime > 0)
+						{
+							StartCoroutine("JumpAction");
+						}
+					}
+					else
+					{
+						if (checkTime > 0)
+						{
+							StopCoroutine("CheckButtonDownSec");
+							checkTime = 0;
+						}
+					}
+				}	
 			}
 		}
 	}
@@ -129,5 +133,21 @@ public class PlayerAction : MonoBehaviour
 		}
 		
 		jumpOn = false;
+	}
+
+	public void FreezeBall()
+	{
+		// ball의 움직임을 멈춤
+		if (jumpOn)
+		{
+			StopCoroutine("JumpAction");
+			jumpOn = false;
+		}
+		else
+		{
+			StopAllCoroutines();
+		}
+
+		freezeState = true;
 	}
 }
